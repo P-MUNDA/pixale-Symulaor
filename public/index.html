@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PixaleSymulator</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+  <header>
+        <nav>
+            <ol>
+                <ol><a href="index.html">Home</a></ol>
+                <ol><a href="blog.html">blog</a></ol>
+                <ol><a href="project.html">project</a></ol>
+                <ol><a href="about.html">about</a></ol>
+                <ol><a href="contact.html">contact</a></ol>
+            </ol>
+        </nav>
+         </header>
+      <h1>Canvas Pixels</h1>
+      <p>Canvas will be rendered here 🐱</p>
+      <div class="canvas-buttons">  
+        <div class="color-buttons">
+        <button class="render Red">on|off</button>
+        <button class="render Blue">on|off</button>
+        <button class="render Green">on|off</button>
+        </div>
+
+        <div class="slider-buttons">
+        <label for="column"> column</label>
+        <input type="range"
+            name="column"
+            value="10"
+            min="1"
+            max="1080">
+        <label for="rows"> rows</label>
+        <input type="range"
+            name="rows"
+            value="10"
+            min="1"
+            max="1920">
+         
+        </div>
+      </div>
+   
+    <div class="canvas">
+      <canvas class="pixa"> </canvas>
+      <!-- <canvas class="pixa"> </canvas> -->
+    </div>
+
+    <script src="/pixale.js" type="module"></script>
+  </body>
+</html>

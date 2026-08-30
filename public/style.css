@@ -1,0 +1,68 @@
+body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* background-color: #000000;
+    color: white; */
+    text-align: center;
+  
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    background-color: #5f4ff5;
+    height: 100px;
+    
+}
+
+nav ol{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    list-style-type:none;
+    margin-right: 20px;
+}
+
+nav ol li,a{
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+}
+
+.canvas{
+    display: grid;
+}
+
+.pixa{
+    border: 2px solid rgb(250, 5, 5);
+    margin: 20px auto;
+    /* height: 1080px; */
+}
+
+.canvas-buttons{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.color-buttons{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+.Red{
+    background-color: rgb(237, 78, 78);
+    height: 50px;  
+}
+.Green{
+    background-color: rgb(78, 237, 78);
+    height: 50px;  
+}
+.Blue{
+    background-color: rgb(78, 78, 237);
+    height: 50px;
+}
