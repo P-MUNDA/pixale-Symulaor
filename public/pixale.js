@@ -1,80 +1,85 @@
 
-import { red, blue, green } from "./utils.js";
-
 const canvas = document.querySelector('.pixa');
 const context = canvas.getContext('2d');
 
+const colorState = {
+  red: true,
+  green: true,
+  blue: true,
+};
 
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
+const width = canvas.width;
+const height = canvas.height;
 
-const width = canvas.width
-const height = canvas.height
+const gDWidth = width * 0.8;
+const gDHeight = height * 0.8;
 
-const gDWidth = width * 0.8
-const gDHeight = height * 0.8
+const marginX = width * 0.1;
+const marginY = height * 0.1;
 
-const marginX = width * 0.1
-const marginY = height * 0.1
+const numRows = 40;
+const numCols = 40;
+const numCells = numCols * numRows;
+const cellW = gDWidth / numCols;
+const cellH = gDHeight / numRows;
 
-const numRows = 40
-const numCols = 40
+const colorMap = {
+  red: 'rgb(255, 0, 0)',
+  green: 'rgb(0, 255, 0)',
+  blue: 'rgb(0, 0, 255)',
+};
 
-
-const numCells = numCols * numRows
-
-const cellW = gDWidth / numCols
-const cellH = gDHeight / numRows
-
-
-function draw() {
-    const width = canvas.width
-    const height = canvas.height
-
-    // Fill background
-    context.fillStyle = 'white';
-    context.fillRect(0, 0, width, height);
-
-        for(let i=0;i<numCells;i++){
-           const col= i%numCols;
-           const row= Math.floor(i/numCols);
-
-           const x= col*cellW;
-           const y= row*cellH;
-           const channelw= cellW/3;
-
-            // Draw RED channel
-            context.save()
-           context.translate(x+marginX,y+marginY);
-           const redColor = red(); 
-           console.log('Applying red color:', redColor);
-           context.fillStyle = redColor;
-           context.fillRect(0,0, cellW*0.25,cellH);
-           context.restore();
-
-           // Draw BLUE channel
-           context.save()
-           context.translate(x+marginX+channelw,y+marginY);
-           const blueColor = blue();
-           console.log('Applying blue color:', blueColor);
-           context.fillStyle = blueColor;
-           context.fillRect(0,0, cellW*0.25,cellH);
-           context.restore();
-
-           // Draw GREEN channel
-           context.save()
-           context.translate(x+marginX+channelw*2,y+marginY);
-           const greenColor = green();
-           console.log('Applying green color:', greenColor);
-           context.fillStyle = greenColor;
-           context.fillRect(0,0, cellW*0.25,cellH);
-           context.restore();
-
-
-        }
-
+function updateButtonText(button, isOn) {
+  const colorName = button.dataset.color;
+  button.textContent = `${colorName.charAt(0).toUpperCase() + colorName.slice(1)} ${isOn ? 'ON' : 'OFF'}`;
+  button.classList.toggle('off', !isOn);
 }
 
- draw();
+document.querySelectorAll('.color-btn').forEach((button) => {
+  const colorName = button.dataset.color;
+
+  button.addEventListener('click', () => {
+    colorState[colorName] = !colorState[colorName];
+    updateButtonText(button, colorState[colorName]);
+    draw();
+  });
+
+  updateButtonText(button, colorState[colorName]);
+});
+
+function draw() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = 'white';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < numCells; i++) {
+    const col = i % numCols;
+    const row = Math.floor(i / numCols);
+
+    const x = col * cellW + marginX;
+    const y = row * cellH + marginY;
+    const channelW = cellW / 3;
+
+    if (colorState.red) {
+      context.fillStyle = colorMap.red;
+      context.fillRect(x, y, cellW * 0.25, cellH);
+    }
+
+    if (colorState.green) {
+      context.fillStyle = colorMap.green;
+      context.fillRect(x + channelW, y, cellW * 0.25, cellH);
+    }
+
+    if (colorState.blue) {
+      context.fillStyle = colorMap.blue;
+      context.fillRect(x + channelW * 2, y, cellW * 0.25, cellH);
+    }
+  }
+}
+
+document.addEventListener('input', draw);
+draw();
 

@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PixaleSymulator</title>
     <link rel="stylesheet" href="/style.css" />
+    <style>
+      .color-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .color-btn {
+        min-width: 120px;
+        height: 50px;
+        border: none;
+        cursor: pointer;
+        color: white;
+        font-weight: 700;
+        transition: 0.2s ease;
+      }
+
+      .color-btn.red {
+        background-color: rgb(237, 78, 78);
+      }
+
+      .color-btn.green {
+        background-color: rgb(78, 237, 78);
+      }
+
+      .color-btn.blue {
+        background-color: rgb(78, 78, 237);
+      }
+
+      .color-btn.off {
+        background-color: #444;
+        opacity: 0.6;
+      }
+    </style>
   </head>
   <body>
   <header>
@@ -20,11 +54,11 @@
          </header>
       <h1>Canvas Pixels</h1>
       <p>Canvas will be rendered here 🐱</p>
-      <div class="canvas-buttons">  
+      <div class="canvas-buttons">
         <div class="color-buttons">
-        <button class="render Red">on|off</button>
-        <button class="render Blue">on|off</button>
-        <button class="render Green">on|off</button>
+          <button class="color-btn red" data-color="red">Red ON</button>
+          <button class="color-btn blue" data-color="blue">Blue ON</button>
+          <button class="color-btn green" data-color="green">Green ON</button>
         </div>
 
         <div class="slider-buttons">
@@ -50,5 +84,6 @@
     </div>
 
     <script src="/pixale.js" type="module"></script>
+  
   </body>
 </html>
