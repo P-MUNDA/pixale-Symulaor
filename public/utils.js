@@ -33,3 +33,14 @@ export function blue() {
 }
 
 console.log(typeof(red())) // 
+
+
+ export function col(){
+    const columnRange= document.querySelector('.colNum');
+    return columnRange.value;
+ }
+
+ export function row(){
+    const rowRange=document.querySelector('.rowNum');
+    return rowRange.value;
+ }

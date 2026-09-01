@@ -1,6 +1,10 @@
-
+import {row, col} from './utils.js';
 const canvas = document.querySelector('.pixa');
 const context = canvas.getContext('2d');
+
+
+const columnRange = document.querySelector('.colNum');
+const rowRange = document.querySelector('.rowNum');
 
 const colorState = {
   red: true,
@@ -19,12 +23,6 @@ const gDHeight = height * 0.8;
 
 const marginX = width * 0.1;
 const marginY = height * 0.1;
-
-const numRows = 40;
-const numCols = 40;
-const numCells = numCols * numRows;
-const cellW = gDWidth / numCols;
-const cellH = gDHeight / numRows;
 
 const colorMap = {
   red: 'rgb(255, 0, 0)',
@@ -51,16 +49,22 @@ document.querySelectorAll('.color-btn').forEach((button) => {
 });
 
 function draw() {
+  const numRows = Number(rowRange.value);
+  const numCols = Number(columnRange.value);
+  const numCells = numCols * numRows;
+  const cellW = gDWidth / numCols;
+  const cellH = gDHeight / numRows;
+
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.fillStyle = 'white';
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   for (let i = 0; i < numCells; i++) {
-    const col = i % numCols;
-    const row = Math.floor(i / numCols);
+    const colIndex = i % numCols;
+    const rowIndex = Math.floor(i / numCols);
 
-    const x = col * cellW + marginX;
-    const y = row * cellH + marginY;
+    const x = colIndex * cellW + marginX;
+    const y = rowIndex * cellH + marginY;
     const channelW = cellW / 3;
 
     if (colorState.red) {
@@ -80,6 +84,8 @@ function draw() {
   }
 }
 
-document.addEventListener('input', draw);
 draw();
+columnRange.addEventListener('input', draw);
+rowRange.addEventListener('input', draw);
 
+ 
